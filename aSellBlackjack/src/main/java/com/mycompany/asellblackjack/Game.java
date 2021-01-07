@@ -10,5 +10,8 @@ package com.mycompany.asellblackjack;
  * @author aakas
  */
 public class Game {
-    
+  
+    public static void main(String[] args){
+     
+    }
 }

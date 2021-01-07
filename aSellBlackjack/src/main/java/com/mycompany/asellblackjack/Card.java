@@ -10,5 +10,7 @@ package com.mycompany.asellblackjack;
  * @author aakas
  */
 public class Card {
-    
+    public Card(int value, int suit){
+        
+    }
 }
