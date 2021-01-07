@@ -9,6 +9,6 @@ package com.mycompany.asellblackjack;
  *
  * @author aakas
  */
-public class Player extends Participant {
+public class Player {
     
 }

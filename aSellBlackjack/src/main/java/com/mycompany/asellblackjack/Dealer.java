@@ -9,7 +9,7 @@ package com.mycompany.asellblackjack;
  *
  * @author aakas
  */
-public class Dealer extends Participant {
+public class Dealer extends Player {
     
     
     
