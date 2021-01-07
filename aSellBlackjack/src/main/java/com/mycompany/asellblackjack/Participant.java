@@ -5,18 +5,25 @@
  */
 package com.mycompany.asellblackjack;
 
-/**
+/**d
  *
  * @author aakas
  */
 public class Participant {
     
-
+    public Card[] hand;
+    
     public void hit(){
     
     }
     
     public void stand(){
         
+    }
+    
+    public void printHand(){
+        for(int i = 0; i < hand.length; i++){
+            hand[i].printCard();
+        }
     }
 }
