@@ -5,12 +5,25 @@
  */
 package com.mycompany.asellblackjack;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author aakas
  */
 public class Dealer extends Player {
     
+    public Dealer(){
+        
+    }
     
+    public boolean doesHit(){
+        if(handValue() < 16){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
     
 }
