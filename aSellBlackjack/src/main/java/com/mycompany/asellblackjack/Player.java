@@ -11,4 +11,15 @@ package com.mycompany.asellblackjack;
  */
 public class Player {
     
+    public Player(){
+        
+    }
+    
+    public void hit(){
+        
+    }
+    
+    public void stand(){
+        
+    }
 }

@@ -5,6 +5,7 @@
  */
 package com.mycompany.asellblackjack;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -13,9 +14,8 @@ import java.util.Random;
  */
 public class Deck {
     
-    public static int shoe = 104;
-    
-    public Card[] deck = new Card[104];
+    public ArrayList<Card> unshuffledDeck;
+    public ArrayList<Card> shoe;
     public int suit;
     public int value;
     public Card card;
@@ -27,34 +27,37 @@ public class Deck {
     }
     
     public void shuffle(){
-       boolean run = true;
-        int i;
-        int doesExist;
-        while(run){
-            i = 0;
-            doesExist = 0;
-            suit = rand.nextInt(4);
-            value = rand.nextInt(13)+1;
-            card = new Card(suit, value);
-            
-            for(int x =0; x < deck.length; x++){
-                if(deck[x] == card){
-                    doesExist+=1;
-                }
-            }
-            if(doesExist <2){
-                deck[i]=(card);
-                i++;
-            }
-            if(i >= shoe){
-                run = false;
-            }
-        } 
+       createDeck();
+       
+       shoe = new ArrayList<>();
+       
+       while(unshuffledDeck.isEmpty() != true){
+       Card card = unshuffledDeck.get(rand.nextInt(unshuffledDeck.size()));
+       
+       shoe.add(card);
+       unshuffledDeck.remove(card);
+       }
+    }
+    
+    
+    
+    public ArrayList<Card> getShoe(){
+        return shoe;
         
     }
     
-    public Card[] getDeck(){
-        return deck;
-    }
     
+    private void createDeck(int n){
+        unshuffledDeck = new ArrayList<>();
+        Card card;
+        for(int x = 0; x < n; x++){
+            for(int s = 1; s <=4; s++){
+                for(int v = 1; v <= 13; v++){
+                    card = new Card(s,v);
+                    unshuffledDeck.add(card);
+                }
+            }
+        }
+        
+    }
 }
