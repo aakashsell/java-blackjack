@@ -26,8 +26,8 @@ public class Deck {
         
     }
     
-    public void shuffle(){
-       createDeck();
+    public void shuffle(int n){
+       createDeck(n);
        
        shoe = new ArrayList<>();
        
@@ -53,11 +53,13 @@ public class Deck {
         for(int x = 0; x < n; x++){
             for(int s = 1; s <=4; s++){
                 for(int v = 1; v <= 13; v++){
-                    card = new Card(s,v);
+                    card = new Card(v,s);
                     unshuffledDeck.add(card);
                 }
             }
         }
         
     }
+    
+    
 }

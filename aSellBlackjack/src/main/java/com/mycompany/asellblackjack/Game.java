@@ -13,6 +13,8 @@ public class Game {
   
     public static void main(String[] args){
         Deck deck = new Deck();
+        deck.shuffle(2);
+        deck.getShoe().get(1).printCard();
         
     }
 }
