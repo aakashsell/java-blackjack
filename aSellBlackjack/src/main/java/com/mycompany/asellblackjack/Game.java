@@ -5,6 +5,8 @@
  */
 package com.mycompany.asellblackjack;
 
+import java.util.Scanner;
+
 /**
  *
  * @author aakas
@@ -19,12 +21,24 @@ public class Game {
         deck = new Deck();
          player = new Player();
          dealer = new Dealer();
+        
+         
+         
     }
   
     public static void main(String[] args){
        Game game = new Game();
        game.shuffle();
-        
+       Scanner scanner = new Scanner(System.in);
+       boolean run = true;
+       while(run){
+            System.out.println("Welcome to Blackjack. A game of luck and a little bit of skill. I hope you have fun!!");
+            if(game.checkGameSave() == true){
+                System.out.println("It looks like you have a saved game. Loading it up for you right now.");
+            }
+            game.deal();
+             
+       }
     }
     
     public void deal(){
@@ -46,7 +60,10 @@ public class Game {
     }
     
     
-    
+    private boolean checkGameSave(){
+        
+        return false;
+    }
     
     
 }

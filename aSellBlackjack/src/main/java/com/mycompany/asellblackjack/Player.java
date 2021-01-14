@@ -21,8 +21,9 @@ public class Player {
         hand = new ArrayList<>();
     }
     
+    
     public void hit(){
-        
+       
     }
     
     public void stand(){
