@@ -27,15 +27,15 @@ public class Deck {
     }
     
     public void shuffle(int n){
-       createDeck(n);
+       this.createDeck(n);
        
        shoe = new ArrayList<>();
        
        while(unshuffledDeck.isEmpty() != true){
-       Card card = unshuffledDeck.get(rand.nextInt(unshuffledDeck.size()));
+       Card tempCard = unshuffledDeck.get(rand.nextInt(unshuffledDeck.size()));
        
-       shoe.add(card);
-       unshuffledDeck.remove(card);
+       shoe.add(tempCard);
+       unshuffledDeck.remove(tempCard);
        }
     }
     

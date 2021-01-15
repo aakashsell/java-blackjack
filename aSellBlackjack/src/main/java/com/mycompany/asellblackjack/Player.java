@@ -47,4 +47,12 @@ public class Player {
         return handValue;
     }
     
+    public ArrayList<Card> getHand(){
+        return hand;
+    }
+    
+    
+    public boolean isPlayer(){
+        return true;
+    }
 }

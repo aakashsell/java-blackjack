@@ -35,21 +35,21 @@ public class Game {
             System.out.println("Welcome to Blackjack. A game of luck and a little bit of skill. I hope you have fun!!");
             if(game.checkGameSave() == true){
                 System.out.println("It looks like you have a saved game. Loading it up for you right now.");
-                getGameSave();
+                game.getGameSave();
             }
             game.deal();
+            game.printHand(game.dealer);
+            game.printHand(game.player);
+            run = false;
              
        }
     }
     
     public void deal(){
         for(int i = 0; i < 2; i++){
-          Card playerCard = deck.getShoe().get(0);
-          deck.getShoe().remove(playerCard);
-          Card dealerCard = deck.getShoe().get(1);
-          deck.getShoe().remove(dealerCard);
-          player.addCard(playerCard);
-          dealer.addCard(dealerCard);
+         
+          player.addCard(deck.getShoe().remove(1));
+          dealer.addCard(deck.getShoe().remove(2));
           
         }
 
@@ -67,6 +67,19 @@ public class Game {
     private boolean checkGameSave(){
         
         return false;
+    }
+    
+    private void printHand(Player p){
+        if(p.isPlayer()){
+            System.out.println("Player hand: ");
+        }else{
+            System.out.println("Dealer hand: ");
+        }
+        String cards = "";
+        for(int i = 0; i < p.getHand().size(); i++){
+            cards += p.getHand().get(i).toString();
+        }
+        System.out.println(cards);
     }
     
     
