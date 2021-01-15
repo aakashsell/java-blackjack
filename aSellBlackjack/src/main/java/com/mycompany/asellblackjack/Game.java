@@ -84,6 +84,7 @@ public class Game {
         for(int i = 0; i < p.getHand().size(); i++){
             System.out.print(p.getHand().get(i).printCard());
         }
+        System.out.println();
     }
     
     
