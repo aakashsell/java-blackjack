@@ -35,6 +35,7 @@ public class Game {
             System.out.println("Welcome to Blackjack. A game of luck and a little bit of skill. I hope you have fun!!");
             if(game.checkGameSave() == true){
                 System.out.println("It looks like you have a saved game. Loading it up for you right now.");
+                getGameSave();
             }
             game.deal();
              
@@ -59,6 +60,9 @@ public class Game {
         
     }
     
+    private void saveGame(){}
+    
+    private void getGameSave(){}
     
     private boolean checkGameSave(){
         

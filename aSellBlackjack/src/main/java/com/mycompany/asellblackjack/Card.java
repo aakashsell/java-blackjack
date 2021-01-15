@@ -13,6 +13,7 @@ public class Card {
     int value = 0;
     int suit = 0;
     int type = 0;
+    int faceUp = -1;
     
     public final static int ACE = 1;
     
@@ -21,9 +22,10 @@ public class Card {
     public static final int CLUBS = 3;
     public static final int DIAMONDS = 4;
     
-    public Card(int t, int s){
+    public Card(int t, int s, int f){
         type = t;
         suit = s;
+        faceUp = f;
     }
     
     public int getValue(){
@@ -61,8 +63,6 @@ public class Card {
             }
         }
         
-        
-        
         cardInfo+=" of ";
         if(suit == SPADES){
             cardInfo+="Spades";
@@ -75,6 +75,20 @@ public class Card {
         }
         return cardInfo;
         
+    }
+    
+    public int isFaceUp(){
+        return faceUp;
+    }
+    
+    public void toggleFaceUp(){
+        if(faceUp == 0){
+            faceUp = 1;
+        }else if(faceUp == 1){
+            faceUp = 0;
+        }else{
+            
+        }
     }
         
 }
