@@ -53,7 +53,7 @@ public class Deck {
         for(int x = 0; x < n; x++){
             for(int s = 1; s <=4; s++){
                 for(int v = 1; v <= 13; v++){
-                    card = new Card(v,s, 0);
+                    card = new Card(v,s,0);
                     unshuffledDeck.add(card);
                 }
             }

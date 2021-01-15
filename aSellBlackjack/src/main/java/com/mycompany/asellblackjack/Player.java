@@ -35,6 +35,9 @@ public class Player {
     }
     
     public void addCard(Card card){
+        if(!card.isFaceUp()){
+            card.toggleFaceUp();
+        }
         hand.add(card);
     }
     

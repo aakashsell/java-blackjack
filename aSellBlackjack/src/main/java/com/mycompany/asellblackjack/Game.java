@@ -40,6 +40,7 @@ public class Game {
             game.deal();
             game.printHand(game.dealer);
             game.printHand(game.player);
+            System.out.println("Would you like to hit or stand?");
             run = false;
              
        }
@@ -69,17 +70,20 @@ public class Game {
         return false;
     }
     
+    private void printRules(){
+        System.out.println();
+    }
+    
     private void printHand(Player p){
+        System.out.println();
         if(p.isPlayer()){
-            System.out.println("Player hand: ");
+            System.out.print("Player hand: ");
         }else{
-            System.out.println("Dealer hand: ");
+            System.out.print("Dealer hand: ");
         }
-        String cards = "";
         for(int i = 0; i < p.getHand().size(); i++){
-            cards += p.getHand().get(i).toString();
+            System.out.print(p.getHand().get(i).printCard());
         }
-        System.out.println(cards);
     }
     
     

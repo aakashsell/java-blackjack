@@ -85,8 +85,13 @@ public class Card {
     }
     
     //Checks to see if the card is face up. 0 is face down, 1 is face up
-    public int isFaceUp(){
-        return faceUp;
+    public boolean isFaceUp(){
+        
+        if(faceUp == 0){
+            return false;
+        }else{
+            return true;
+        }
     }
     
     //toggles the card between face up and face down
