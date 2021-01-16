@@ -21,6 +21,15 @@ public class Player {
         hand = new ArrayList<>();
     }
     
+    public Player(ArrayList<Card> h){
+        hand = h;
+    }
+    
+    public Player(ArrayList<Card> h1, ArrayList<Card> h2){
+        hand = h1;
+        hand2 = h2;
+    }
+    
     
     public void hit(){
        

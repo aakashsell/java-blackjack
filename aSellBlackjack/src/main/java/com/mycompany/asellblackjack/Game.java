@@ -18,9 +18,7 @@ public class Game {
     Dealer dealer;
     
     public Game(){
-        deck = new Deck();
-         player = new Player();
-         dealer = new Dealer();
+       
         
          
          
@@ -36,12 +34,23 @@ public class Game {
             if(game.checkGameSave() == true){
                 System.out.println("It looks like you have a saved game. Loading it up for you right now.");
                 game.getGameSave();
+            }else{
+                game.deck = new Deck();
+                game.player = new Player();
+                game.dealer = new Dealer();
             }
             game.deal();
             game.printHand(game.dealer);
             game.printHand(game.player);
             System.out.println("Would you like to hit(h) or stand(s)?");
-            String playerMove = scan.next();
+            String playerMove = scan.nextLine();
+            if(playerMove.toLowerCase().charAt(0) == 'h'){
+                
+            }else if(playerMove.toLowerCase().charAt(0) == 's'){
+                
+            }else{
+                System.out.println("There has been an error processing your response.");
+            }
              
        }
     }
@@ -49,11 +58,15 @@ public class Game {
     public void deal(){
         for(int i = 0; i < 2; i++){
          
-          player.addCard(deck.getShoe().remove(1));
-          dealer.addCard(deck.getShoe().remove(2));
+          player.addCard(deck.getShoe().remove(0));
+          dealer.addCard(deck.getShoe().remove(1));
           
         }
 
+    }
+    
+    private void addCard(Player p){
+        p.addCard(deck.getShoe().remove(0));
     }
     
     public void shuffle(){
