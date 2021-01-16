@@ -37,8 +37,16 @@ public class Game {
                 playerResponse = scan.nextLine();
                 switch (game.toChar(playerResponse)) {
                     case 'n':
+                        game.printRules();
                         break;
                     case 'c':
+                        System.out.println("Would you like a refresher on the rules of blackjack? y or n");
+                        playerResponse = scan.nextLine();
+                        if(game.toChar(playerResponse) == 'y'){
+                            game.printRules();
+                        }else{
+                            System.out.println("Ok, you must be a master blackjack player!!");
+                        }
                         break;
                     default:
                         System.out.println("There has been an error processing your response.");
@@ -75,6 +83,9 @@ public class Game {
          
           player.addCard(deck.getShoe().remove(0));
           dealer.addCard(deck.getShoe().remove(1));
+          if(i != 0){
+              dealer.hand.get(1).toggleFaceUp();
+          }
           
         }
 
@@ -101,6 +112,10 @@ public class Game {
     }
     
     private void printRules(){
+        System.out.println("The goal of this game is for the point values of your cards to get as close to 21 without going over 21.");
+        System.out.println("You will get both of your cards face up but you will only see the dealers first card.");
+        System.out.println("The point values of the cards will be the numeric value of the card.");
+        System.out.println("The only exceptions are that all face cards are valued at ten and the ace can be valued at 11 or 1, the player decided.");
         System.out.println();
     }
     
@@ -112,7 +127,7 @@ public class Game {
             System.out.print("Dealer hand: ");
         }
         for(int i = 0; i < p.getHand().size(); i++){
-            System.out.print(p.getHand().get(i).printCard());
+            System.out.println(p.getHand().get(i).printCard());
         }
         System.out.println();
     }
