@@ -26,31 +26,46 @@ public class Game {
   
     public static void main(String[] args){
        Game game = new Game();
-       game.shuffle();
        Scanner scan = new Scanner(System.in);
+       String playerResponse;
        boolean run = true;
        while(run){
             System.out.println("Welcome to Blackjack. A game of luck and a little bit of skill. I hope you have fun!!");
             if(game.checkGameSave() == true){
                 System.out.println("It looks like you have a saved game. Loading it up for you right now.");
+                System.out.println("Would you like to start a new(n) game or continue(c) your old game?");
+                playerResponse = scan.nextLine();
+                switch (game.toChar(playerResponse)) {
+                    case 'n':
+                        break;
+                    case 'c':
+                        break;
+                    default:
+                        System.out.println("There has been an error processing your response.");
+                        break;
+                }
                 game.getGameSave();
             }else{
                 game.deck = new Deck();
                 game.player = new Player();
                 game.dealer = new Dealer();
+                game.shuffle();
+                game.deal();
             }
-            game.deal();
+            
             game.printHand(game.dealer);
             game.printHand(game.player);
             System.out.println("Would you like to hit(h) or stand(s)?");
-            String playerMove = scan.nextLine();
-            if(playerMove.toLowerCase().charAt(0) == 'h'){
-                
-            }else if(playerMove.toLowerCase().charAt(0) == 's'){
-                
-            }else{
-                System.out.println("There has been an error processing your response.");
-            }
+            playerResponse = scan.nextLine();
+           switch (game.toChar(playerResponse)) {
+               case 'h':
+                   break;
+               case 's':
+                   break;
+               default:
+                   System.out.println("There has been an error processing your response.");
+                   break;
+           }
              
        }
     }
@@ -76,7 +91,9 @@ public class Game {
     
     private void saveGame(){}
     
-    private void getGameSave(){}
+    private void getGameSave(){
+        
+    }
     
     private boolean checkGameSave(){
         
@@ -100,5 +117,8 @@ public class Game {
         System.out.println();
     }
     
+    private char toChar(String s){
+        return s.toLowerCase().charAt(0);
+    }
     
 }
