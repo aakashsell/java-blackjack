@@ -43,7 +43,7 @@ public class Player {
     
     public boolean checkSplit(Card c){
         for(int i = 0; i < hand.size() -1; i++){
-            if(hand.get(i) == c){
+            if(hand.get(i).getValue() == c.getValue()){
                 return true;
             }
         }
@@ -57,8 +57,8 @@ public class Player {
         }
         hand.add(card);
     }
-    
     public int handValue(){
+    
         int handValue = 0;
         for(int i = 0; i < hand.size();i++){
             handValue += hand.get(i).getValue();

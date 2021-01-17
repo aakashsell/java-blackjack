@@ -54,6 +54,7 @@ public class Game {
                 }
                 game.getGameSave();
             }else{
+                game.printRules();
                 game.deck = new Deck();
                 game.player = new Player();
                 game.dealer = new Dealer();
@@ -67,14 +68,19 @@ public class Game {
             playerResponse = scan.nextLine();
            switch (game.toChar(playerResponse)) {
                case 'h':
+                   System.out.println("You hit!!");
                    break;
                case 's':
+                   System.out.println("You stand!!");
                    break;
                default:
                    System.out.println("There has been an error processing your response.");
                    break;
            }
-             
+           if(run == true){
+               run = false;
+               System.out.println("Game over loser");
+           }  
        }
     }
     
