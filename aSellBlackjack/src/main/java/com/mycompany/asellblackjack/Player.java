@@ -16,9 +16,11 @@ public class Player {
     public int hands = 0; 
     public ArrayList<Card> hand;
     public ArrayList<Card> hand2;
+    public boolean doesSplit = false;
     
     public Player(){
         hand = new ArrayList<>();
+        hand2 = new ArrayList<>();
     }
     
     public Player(ArrayList<Card> h){
@@ -39,8 +41,14 @@ public class Player {
         
     }
     
-    public void split(){
-        hand2 = new ArrayList<>();
+    public boolean checkSplit(Card c){
+        for(int i = 0; i < hand.size() -1; i++){
+            if(hand.get(i) == c){
+                return true;
+            }
+        }
+        
+        return false;
     }
     
     public void addCard(Card card){
@@ -63,8 +71,20 @@ public class Player {
         return hand;
     }
     
+    public ArrayList<Card> getSecondHand(){
+        return hand2;
+    }
     
     public boolean isPlayer(){
         return true;
+    }
+    
+    public boolean doesSplit(){
+        return doesSplit;
+    }
+    
+    public void split(){
+        hand2.add(hand.remove(hand.size() - 1));
+        doesSplit = true;
     }
 }
