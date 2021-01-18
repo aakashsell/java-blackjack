@@ -26,6 +26,7 @@ public class Dealer extends Player {
         }
     }
     
+    @Override
     public boolean isPlayer(){
         return false;
     }
