@@ -12,22 +12,17 @@ import java.util.Scanner;
  * @author aakas
  */
 public class Game {
-    
-    Deck deck;
-    Player player;
-    Dealer dealer;
-    
+    Deck deck; //The deck object;
+    Player player; //The player object
+    Dealer dealer; //The dealer object 
     public Game(){
-       
         
-         
-         
     }
   
     public static void main(String[] args){
-       Game game = new Game();
-       Scanner scan = new Scanner(System.in);
-       String playerResponse;
+       Game game = new Game(); //Create a new game object
+       Scanner scan = new Scanner(System.in); //Create the scanner object to hand input during the game
+       String playerResponse; //The variable that holds the value of the scanner when it is used.
        boolean run = true;
        while(run){
             System.out.println("Welcome to Blackjack. A game of luck and a little bit of skill. I hope you have fun!!");
