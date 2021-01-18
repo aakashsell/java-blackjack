@@ -9,8 +9,10 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- *
- * @author aakas
+ * Aakash Sell
+ * January 19, 2021
+ * 
+ * The deck class holds an arraylist of cards and shuffles the arraylist to create a random shoe.
  */
 public class Deck {
     
@@ -26,6 +28,7 @@ public class Deck {
         
     }
     
+    //Shuffles the deck by creating a deck by adding to the deck in a random order.
     public void shuffle(int n){
        this.createDeck(n);
        
@@ -40,13 +43,13 @@ public class Deck {
     }
     
     
-    
+    //Returns the generated shuffled shoe
     public ArrayList<Card> getShoe(){
         return shoe;
         
     }
     
-    
+    //creates the unshuffled deck that will be used to create the shoe
     private void createDeck(int n){
         unshuffledDeck = new ArrayList<>();
         Card card;

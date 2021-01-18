@@ -9,7 +9,10 @@ import java.util.ArrayList;
 
 /**
  *
- * @author aakas
+ * Aakash Sell
+ * January 19, 2021
+ * 
+ * This class holds all the information for the players such as hands and the hands' value.
  */
 public class Player {
     
@@ -32,15 +35,18 @@ public class Player {
         hand2 = h2;
     }
     
-    
+    //Makes it so the player hits
     public void hit(){
        
     }
     
+    
+    //Makes it so the player stands
     public void stand(){
         
     }
     
+    //Checks to see if the player is eligible to split their hand
     public boolean checkSplit(Card c){
         for(int i = 0; i < hand.size() -1; i++){
             if(hand.get(i).getValue() == c.getValue()){
@@ -51,12 +57,15 @@ public class Player {
         return false;
     }
     
+    //Adds a card to the player's hand
     public void addCard(Card card){
         if(!card.isFaceUp()){
             card.toggleFaceUp();
         }
         hand.add(card);
     }
+    
+    //Checks the value of the player's hand
     public int handValue(){
     
         int handValue = 0;
@@ -67,22 +76,23 @@ public class Player {
         return handValue;
     }
     
+    //Returns the players hand
     public ArrayList<Card> getHand(){
         return hand;
     }
     
+    //Returns the player's second hand in the case of a split
     public ArrayList<Card> getSecondHand(){
         return hand2;
     }
     
+    //Returns that this class is the physical player
     public boolean isPlayer(){
         return true;
     }
     
-    public boolean doesSplit(){
-        return doesSplit;
-    }
-    
+   
+    //A basic split method
     public void split(){
         hand2.add(hand.remove(hand.size() - 1));
         doesSplit = true;

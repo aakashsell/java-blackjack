@@ -8,8 +8,10 @@ package com.mycompany.asellblackjack;
 import java.util.Scanner;
 
 /**
- *
- * @author aakas
+ * Aakash Sell
+ * January 19, 2021
+ * 
+ * This class runs the game.
  */
 public class Game {
     Deck deck; //The deck object;
@@ -19,6 +21,7 @@ public class Game {
         
     }
   
+    //The main method that runs the game
     public static void main(String[] args){
        Game game = new Game(); //Create a new game object
        Scanner scan = new Scanner(System.in); //Create the scanner object to hand input during the game
@@ -79,6 +82,8 @@ public class Game {
        }
     }
     
+    
+    //Deals the initial cards to the player and the dealer
     public void deal(){
         for(int i = 0; i < 2; i++){
          
@@ -92,26 +97,34 @@ public class Game {
 
     }
     
+    //Adds a card to a participants hand
     private void addCard(Player p){
         p.addCard(deck.getShoe().remove(0));
     }
     
+    //Makes the deck shuffle from within this class
     public void shuffle(){
         deck.shuffle(2);
         
     }
     
+    //Saves the game
     private void saveGame(){}
     
+    
+    //Gets a save game
     private void getGameSave(){
         
     }
     
+    //Checks if there is a save game
     private boolean checkGameSave(){
         
         return false;
     }
     
+    
+    //Prints the rules of blackjack
     private void printRules(){
         System.out.println("The goal of this game is for the point values of your cards to get as close to 21 without going over 21.");
         System.out.println("You will get both of your cards face up but you will only see the dealers first card.");
@@ -120,6 +133,8 @@ public class Game {
         System.out.println();
     }
     
+    
+    //Prints the hand of the player that is passed to it
     private void printHand(Player p){
         System.out.println();
         if(p.isPlayer()){
@@ -133,6 +148,7 @@ public class Game {
         System.out.println();
     }
     
+    //Converts the player input into a lowercase char for easy processing
     private char toChar(String s){
         return s.toLowerCase().charAt(0);
     }

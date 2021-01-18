@@ -6,8 +6,10 @@
 package com.mycompany.asellblackjack;
 
 /**
- *
- * @author aakas
+ * Aakash Sell
+ * January 19, 2021
+ * 
+ * The card class that holds all the attributes of a card such as the suit, value, and type.
  */
 public class Card {
     int value = 0;
