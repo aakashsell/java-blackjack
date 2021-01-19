@@ -67,7 +67,7 @@ public class Player {
     
     //Checks the value of the player's hand
     public int handValue(){
-    
+        
         int handValue = 0;
         for(int i = 0; i < hand.size();i++){
             handValue += hand.get(i).getValue();
@@ -96,5 +96,25 @@ public class Player {
     public void split(){
         hand2.add(hand.remove(hand.size() - 1));
         doesSplit = true;
+    }
+    
+    //Checks if there is an ace in the hand as well returning the number of aces
+    public int isAce(){
+        int numAces = 0;
+        for(int i = 0; i < hand.size();i++){
+            if(hand.get(i).getValue() == 1){
+                numAces += 1;
+            }
+        }
+        
+        return numAces;
+    }
+    
+    public void setAceToEleven(){
+        for(int i = 0; i < hand.size();i++){
+            if(hand.get(i).getValue() == 1){
+                hand.get(i).setValue(11);
+            }
+        }
     }
 }

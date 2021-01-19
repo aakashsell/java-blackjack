@@ -106,5 +106,10 @@ public class Card {
             
         }
     }
+    
+    //Change the value of a card. Meant exclusively for aces.
+    public void setValue(int x){
+        value = x;
+    }
         
 }
