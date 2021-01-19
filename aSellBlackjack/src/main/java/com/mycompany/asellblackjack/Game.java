@@ -62,7 +62,7 @@ public class Game {
             
             game.printHand(game.dealer);
             game.printHand(game.player);
-            System.out.println("Would you like to hit(h) or stand(s)?");
+            System.out.println("Would you like to hit(h) , stand(s) or fold(f)?");
             playerResponse = scan.nextLine();
            switch (game.toChar(playerResponse)) {
                case 'h':
@@ -70,6 +70,10 @@ public class Game {
                    break;
                case 's':
                    System.out.println("You stand!!");
+                   break;
+               case 'f':
+                   System.out.println("I guess game over. Good job");
+                   run = false;
                    break;
                default:
                    System.out.println("There has been an error processing your response.");
