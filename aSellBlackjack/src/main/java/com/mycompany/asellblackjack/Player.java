@@ -10,7 +10,7 @@ import java.util.ArrayList;
 /**
  *
  * Aakash Sell
- * January 19, 2021
+ * January 28, 2021
  * 
  * This class holds all the information for the players such as hands and the hands' value.
  */
@@ -110,6 +110,8 @@ public class Player {
         return numAces;
     }
     
+    
+    //Sets the value to an ace to eleven.
     public void setAceToEleven(){
         for(int i = 0; i < hand.size();i++){
             if(hand.get(i).getValue() == 1){
