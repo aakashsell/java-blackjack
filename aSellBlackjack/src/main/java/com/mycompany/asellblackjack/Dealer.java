@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 /**
  * Aakash Sell
- * January 19, 2021
+ * January 28, 2021
  * 
  * The child of the player class. It differentiates itself by having some automated behaviors.
  */

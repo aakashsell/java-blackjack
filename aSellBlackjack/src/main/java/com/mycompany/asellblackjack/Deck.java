@@ -10,7 +10,7 @@ import java.util.Random;
 
 /**
  * Aakash Sell
- * January 19, 2021
+ * January 28, 2021
  * 
  * The deck class holds an arraylist of cards and shuffles the arraylist to create a random shoe.
  */
