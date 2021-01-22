@@ -20,6 +20,8 @@ public class Player {
     public ArrayList<Card> hand;
     public ArrayList<Card> hand2;
     public boolean doesSplit = false;
+    public int aces = 0;
+    public int aces2 = 0;
     
     public Player(){
         hand = new ArrayList<>();
@@ -36,7 +38,7 @@ public class Player {
     }
     
     //Makes it so the player hits
-    public void hit(){
+    public void hit(Card c){
        
     }
     
@@ -58,14 +60,29 @@ public class Player {
     }
     
     //Adds a card to the player's hand
-    public void addCard(Card card){
-        if(!card.isFaceUp()){
-            card.toggleFaceUp();
+    public int addCard(Card card, int i){
+        //if(!card.isFaceUp()){
+            card.setFaceUp();
+        //}
+        if(i == 2){
+            hand2.add(card);
+            if(card.isAce){
+            aces2 +=1;
+            return 1;
         }
-        hand.add(card);
+        }else{
+            hand.add(card);
+            if(card.isAce){
+            aces +=1;
+            return 1;
+        }
+        }
+        
+        return 0;
+        
     }
     
-    //Checks the value of the player's hand
+   //Checks the value of the player's hand
     public int handValue(){
         
         int handValue = 0;
@@ -98,17 +115,7 @@ public class Player {
         doesSplit = true;
     }
     
-    //Checks if there is an ace in the hand as well returning the number of aces
-    public int isAce(){
-        int numAces = 0;
-        for(int i = 0; i < hand.size();i++){
-            if(hand.get(i).getValue() == 1){
-                numAces += 1;
-            }
-        }
-        
-        return numAces;
-    }
+
     
     
     //Sets the value to an ace to eleven.

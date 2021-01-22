@@ -67,6 +67,9 @@ public class Game {
            switch (game.toChar(playerResponse)) {
                case 'h':
                    System.out.println("You hit!!");
+                   game.addCard(game.player);
+                   game.printHand(game.player);
+                   
                    break;
                case 's':
                    System.out.println("You stand!!");
@@ -79,6 +82,7 @@ public class Game {
                    System.out.println("There has been an error processing your response.");
                    break;
            }
+           game.dealerTurn();
            if(run == true){
                run = false;
                System.out.println("Game over loser");
@@ -91,8 +95,8 @@ public class Game {
     public void deal(){
         for(int i = 0; i < 2; i++){
          
-          player.addCard(deck.getShoe().remove(0));
-          dealer.addCard(deck.getShoe().remove(1));
+          player.addCard(deck.getShoe().remove(0), 1);
+          dealer.addCard(deck.getShoe().remove(1), 1);
           if(i != 0){
               dealer.hand.get(1).toggleFaceUp();
           }
@@ -103,7 +107,36 @@ public class Game {
     
     //Adds a card to a participants hand
     private void addCard(Player p){
-        p.addCard(deck.getShoe().remove(0));
+        Scanner scan = new Scanner(System.in);
+        String answer;
+        Card tempCard = deck.getShoe().remove(0);
+        tempCard.setFaceUp();
+        int i;
+        System.out.println("New card: ");
+        System.out.println(tempCard.printCard());
+        if(p.checkSplit(tempCard) ==  true){
+            if(p.isPlayer() == true){
+                System.out.println("It appears as this is the second card in your hand with this value, would you like to split your hand? y or n");
+                answer = scan.nextLine();
+                if(toChar(answer) == 'y'){
+                    System.out.println("Ok, splitting your hand right now.");
+                    i = p.addCard(tempCard, 2);
+                    if(i == 1){
+                        System.out.println("This card is an ace. That means it can have a value of either 1 or 11");
+                    }
+                }else{
+                    i = p.addCard(tempCard, 1);
+                    if(i == 1){
+                        System.out.println("This card is an ace. That means it can have a value of either 1 or 11");
+                    }
+                }
+            }else{
+                i = p.addCard(tempCard, 1);
+            }
+        }else{
+            p.addCard(tempCard, 1);
+        }
+        
     }
     
     //Makes the deck shuffle from within this class
@@ -149,6 +182,16 @@ public class Game {
         for(int i = 0; i < p.getHand().size(); i++){
             System.out.println(p.getHand().get(i).printCard());
         }
+        if(p.doesSplit == true){
+            if(p.isPlayer()){
+            System.out.print("Player Second hand: ");
+            }else{
+            System.out.print("Dealer Second hand: ");
+            }
+            for(int i = 0; i < p.getSecondHand().size(); i++){
+            System.out.println(p.getSecondHand().get(i).printCard());
+            }
+        }
         System.out.println();
     }
     
@@ -157,4 +200,14 @@ public class Game {
         return s.toLowerCase().charAt(0);
     }
     
+    private void dealerTurn(){
+        if(dealer.handValue() <= 16){
+            System.out.println("The dealer hits this round");
+            addCard(dealer);
+            printHand(dealer);
+            
+        }else if(dealer.handValue() > 16){
+            System.out.println("The dealer folds this round");
+        }
+    }
 }

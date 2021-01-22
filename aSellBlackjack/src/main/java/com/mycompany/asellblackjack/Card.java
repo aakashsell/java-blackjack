@@ -16,6 +16,7 @@ public class Card {
     int suit = 0;
     int type = 0;
     int faceUp = -1;
+    boolean isAce = false;
     
     public final static int ACE = 1;
     public static final int SPADES = 1;
@@ -107,9 +108,22 @@ public class Card {
         }
     }
     
+    public void setFaceUp(){
+        faceUp = 1;
+    }   
+    
     //Change the value of a card. Meant exclusively for aces.
     public void setValue(int x){
         value = x;
     }
+    
+    public boolean isAce(){
+        if(getValue() == 1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
         
 }
