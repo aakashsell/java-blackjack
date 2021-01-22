@@ -83,6 +83,9 @@ public class Game {
                    break;
            }
            game.dealerTurn();
+           if(game.deck.getShoe().size() < 11){
+               run = false;
+           }
            if(run == true){
                run = false;
                System.out.println("Game over loser");
