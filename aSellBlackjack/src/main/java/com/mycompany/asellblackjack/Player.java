@@ -145,12 +145,20 @@ public class Player {
         }
     }
     
-    private int numAces(){
+    public int numAces(int h){
         int x = 0;
-        for(int i = 0; i < hand.size();i++){
+        if(h == 1){
+            for(int i = 0; i < hand.size();i++){
+                if(hand.get(i).getValue() == 1){
+                    x++;
+                }
+            }
+        }else if(h == 2){
+            for(int i = 0; i < hand.size();i++){
             if(hand.get(i).getValue() == 1){
                 x++;
             }
+        }
         }
         
         return x;
