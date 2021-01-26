@@ -11,12 +11,15 @@ import java.util.Scanner;
  * Aakash Sell
  * January 28, 2021
  * 
- * This class runs the game.
+ * This class runs the game
  */
 public class Game {
     Deck deck; //The deck object;
     Player player; //The player object
     Dealer dealer; //The dealer object 
+    Scanner scan = new Scanner(System.in); //Create the scanner object to hand input during the game.
+    String playerResponse; //The variable that holds the value of the scanner when it is used.
+    boolean run = false;
     public Game(){
         
     }
@@ -24,24 +27,49 @@ public class Game {
     //The main method that runs the game
     public static void main(String[] args){
        Game game = new Game(); //Create a new game object
-       Scanner scan = new Scanner(System.in); //Create the scanner object to hand input during the game
-       String playerResponse; //The variable that holds the value of the scanner when it is used.
-       boolean run = true;
+       game.run();
+    }
+    
+    public void run(){
+       run = true;
+       System.out.println("Welcome to Blackjack. A game of luck and a little bit of skill. I hope you have fun!!");
+       startGame();
+       printHand(dealer);
+       printHand(player);
        while(run){
-            System.out.println("Welcome to Blackjack. A game of luck and a little bit of skill. I hope you have fun!!");
-            if(game.checkGameSave() == true){
+           
+            
+            if(!didStand(player)){
+                printHand(player);
+                playerTurn(); 
+            }else if(!didStand(dealer)){
+                printHand(dealer);
+                dealerTurn();
+            }else{
+                whoWin();
+            }
+            
+           if(deck.getShoe().size() < 11){
+               run = false;
+           }
+       }
+    }
+    
+    
+    public void startGame(){
+        if(checkGameSave() == true){
                 System.out.println("It looks like you have a saved game. Loading it up for you right now.");
                 System.out.println("Would you like to start a new(n) game or continue(c) your old game?");
                 playerResponse = scan.nextLine();
-                switch (game.toChar(playerResponse)) {
+                switch (toChar(playerResponse)) {
                     case 'n':
-                        game.printRules();
+                        printRules();
                         break;
                     case 'c':
                         System.out.println("Would you like a refresher on the rules of blackjack? y or n");
                         playerResponse = scan.nextLine();
-                        if(game.toChar(playerResponse) == 'y'){
-                            game.printRules();
+                        if(toChar(playerResponse) == 'y'){
+                            printRules();
                         }else{
                             System.out.println("Ok, you must be a master blackjack player!!");
                         }
@@ -50,29 +78,27 @@ public class Game {
                         System.out.println("There has been an error processing your response.");
                         break;
                 }
-                game.getGameSave();
+                getGameSave();
             }else{
-                game.printRules();
-                game.deck = new Deck();
-                game.player = new Player();
-                game.dealer = new Dealer();
-                game.shuffle();
-                game.deal();
+               printRules();
+               reset();
             }
-            
-            game.printHand(game.dealer);
-            game.printHand(game.player);
-            System.out.println("Would you like to hit(h) , stand(s) or fold(f)?");
-            playerResponse = scan.nextLine();
-           switch (game.toChar(playerResponse)) {
+    }
+    
+    public void playerTurn(){
+        
+        System.out.println("Would you like to hit(h) , stand(s) or fold(f)?");
+           playerResponse = scan.nextLine();
+           switch (toChar(playerResponse)) {
                case 'h':
                    System.out.println("You hit!!");
-                   game.addCard(game.player);
-                   game.printHand(game.player);
-                   
+                   addCard(player);
+                   printHand(player);
                    break;
                case 's':
                    System.out.println("You stand!!");
+                   player.stand();
+                   printHand(player);
                    break;
                case 'f':
                    System.out.println("I guess game over. Good job");
@@ -82,17 +108,12 @@ public class Game {
                    System.out.println("There has been an error processing your response.");
                    break;
            }
-           game.dealerTurn();
-           if(game.deck.getShoe().size() < 11){
-               run = false;
+           
+           if(player.checkLose() == true){
+               System.out.println("It appears that you have gone over 21. You lose!");
+               run = playAgain();
            }
-           if(run == true){
-               run = false;
-               System.out.println("Game over loser");
-           }  
-       }
     }
-    
     
     //Deals the initial cards to the player and the dealer
     public void deal(){
@@ -110,8 +131,6 @@ public class Game {
     
     //Adds a card to a participants hand
     private void addCard(Player p){
-        Scanner scan = new Scanner(System.in);
-        String answer;
         Card tempCard = deck.getShoe().remove(0);
         tempCard.setFaceUp();
         int i;
@@ -120,8 +139,8 @@ public class Game {
         if(p.checkSplit(tempCard) ==  true){
             if(p.isPlayer() == true){
                 System.out.println("It appears as this is the second card in your hand with this value, would you like to split your hand? y or n");
-                answer = scan.nextLine();
-                if(toChar(answer) == 'y'){
+                playerResponse = scan.nextLine();
+                if(toChar(playerResponse) == 'y'){
                     System.out.println("Ok, splitting your hand right now.");
                     i = p.addCard(tempCard, 2);
                     if(i == 1){
@@ -143,7 +162,7 @@ public class Game {
     }
     
     //Makes the deck shuffle from within this class
-    public void shuffle(){
+    private void shuffle(){
         deck.shuffle(2);
         
     }
@@ -210,7 +229,47 @@ public class Game {
             printHand(dealer);
             
         }else if(dealer.handValue() > 16){
-            System.out.println("The dealer folds this round");
+            System.out.println("The dealer stands");
+            dealer.stand();
+            printHand(dealer);
+        }
+        if(dealer.checkLose() == true){
+               System.out.println("It appears that the dealer has lost. You win!");
+               run = playAgain();
+           }
+    }
+    
+    private boolean playAgain(){
+        String playerResponse;
+        System.out.println("Would you like to play again? y or n");
+        playerResponse = scan.nextLine();
+        if(toChar(playerResponse) == 'y'){
+            reset();
+            return true;
+        }else{
+            return false;
         }
     }
+    
+    private void reset(){
+         deck = new Deck();
+         player = new Player();
+         dealer = new Dealer();
+         shuffle();
+         deal();
+    }
+    
+    private boolean didStand(Player p){
+        return p.didStand();
+    }
+    
+    private void whoWin(){
+        if(player.handValue() > dealer.handValue()){
+            System.out.println("You won the game good job.");
+        }else{
+            System.out.println("Oh no. You lost.");
+        }
+        run = playAgain();
+    }
+    
 }

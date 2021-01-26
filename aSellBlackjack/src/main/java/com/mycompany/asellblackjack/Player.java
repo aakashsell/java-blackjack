@@ -22,6 +22,7 @@ public class Player {
     public boolean doesSplit = false;
     public int aces = 0;
     public int aces2 = 0;
+    public boolean stand = false;
     
     public Player(){
         hand = new ArrayList<>();
@@ -42,10 +43,13 @@ public class Player {
        
     }
     
-    
-    //Makes it so the player stands
     public void stand(){
-        
+        stand = true;
+    }
+    
+    //Jecks if the player stands.
+    public boolean didStand(){
+        return stand;
     }
     
     //Checks to see if the player is eligible to split their hand
@@ -124,6 +128,14 @@ public class Player {
             if(hand.get(i).getValue() == 1){
                 hand.get(i).setValue(11);
             }
+        }
+    }
+    
+    public boolean checkLose(){
+        if(handValue()>21){
+            return true;
+        }else{
+            return false;
         }
     }
 }
