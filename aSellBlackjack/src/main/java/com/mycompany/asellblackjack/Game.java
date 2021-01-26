@@ -241,7 +241,16 @@ public class Game {
             System.out.println(p.getHand().get(i).printCard());
         }
         System.out.println("Hand Value: ");
+<<<<<<< HEAD
         
+=======
+        if(p.numAces(1) ==0){
+            System.out.println(p.handValue());
+        }else{
+            System.out.println(p.handValue() + " or " + p.handValue()+(10*p.numAces(1)));
+        }
+    
+>>>>>>> 3df04b7627a2ebde5e797d7bf0588887fcebdaa1
         if(p.doesSplit == true){
             if(p.isPlayer()){
             System.out.print("Player Second hand: ");
