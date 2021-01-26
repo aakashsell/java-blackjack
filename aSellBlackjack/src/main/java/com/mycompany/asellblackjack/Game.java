@@ -7,6 +7,7 @@ package com.mycompany.asellblackjack;
 
 import java.util.Scanner;
 import java.io.*;
+import java.util.ArrayList;
 
 /**
  * Aakash Sell
@@ -28,12 +29,12 @@ public class Game {
     }
   
     //The main method that runs the game
-    public static void main(String[] args){
+    public static void main(String[] args) throws FileNotFoundException{
        Game game = new Game(); //Create a new game object
        game.run();
     }
     
-    public void run(){
+    public void run() throws FileNotFoundException{
        run = true;
        System.out.println("Welcome to Blackjack. A game of luck and a little bit of skill. I hope you have fun!!");
        startGame();
@@ -52,14 +53,14 @@ public class Game {
                 whoWin();
             }
             
-           if(deck.getShoe().size() < 11){
+           if(deck.getShoe().size() < 10){
                run = false;
            }
        }
     }
     
     
-    public void startGame(){
+    public void startGame() throws FileNotFoundException{
         if(checkGameSave() == true){
                 System.out.println("It looks like you have a saved game. Loading it up for you right now.");
                 System.out.println("Would you like to start a new(n) game or continue(c) your old game?");
@@ -81,7 +82,7 @@ public class Game {
                         System.out.println("There has been an error processing your response.");
                         break;
                 }
-                getGameSave();
+                getGameSave(save);
             }else{
                printRules();
                reset();
@@ -172,13 +173,40 @@ public class Game {
     }
     
     //Saves the game
-    private void saveGame(){
-    
+    private void saveGame(File f) throws FileNotFoundException{
+        PrintWriter out = new PrintWriter(f);
+        
+        try{
+            
+            out.close();
+        }catch(Exception e){
+            System.out.println("File not found");
+            System.out.println(e.toString());
+        }
+        
     }
     
     
     //Gets a save game
-    private void getGameSave(){
+    private void getGameSave(File f) throws FileNotFoundException{
+        ArrayList<Card> playerHand1 = null;
+        ArrayList<Card> playerHand2 = null;
+        ArrayList<Card> dealerHand1 = null;
+        ArrayList<Card> dealerHand2 = null;
+        ArrayList<Card> savedDeck = null;
+        Scanner input = new Scanner(save);
+        
+        if(playerHand2 != null){
+            player = new Player(playerHand1, playerHand2);
+        }else{
+            player = new Player(playerHand2);
+        }
+        if(dealerHand2 != null){
+            player = new Player(playerHand1, playerHand2);
+        }else{
+            player = new Player(playerHand2);
+        }
+        deck = new Deck(savedDeck);
         
     }
     
@@ -213,6 +241,7 @@ public class Game {
             System.out.println(p.getHand().get(i).printCard());
         }
         System.out.println("Hand Value: ");
+        
         if(p.doesSplit == true){
             if(p.isPlayer()){
             System.out.print("Player Second hand: ");

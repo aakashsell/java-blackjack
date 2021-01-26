@@ -28,6 +28,10 @@ public class Deck {
         
     }
     
+    public Deck(ArrayList<Card> c){
+        shoe = c;
+    }
+    
     //Shuffles the deck by creating a deck by adding to the deck in a random order.
     public void shuffle(int n){
        this.createDeck(n);
