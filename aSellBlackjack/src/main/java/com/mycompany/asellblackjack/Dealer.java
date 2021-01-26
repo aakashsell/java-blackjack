@@ -47,4 +47,15 @@ public class Dealer extends Player {
         
         return false;
     }
+    
+    @Override
+    public String getName(){
+        if(name != null){
+            return name;
+        }else{
+            return "Dealer";
+        }
+    }
+    
+    
 }

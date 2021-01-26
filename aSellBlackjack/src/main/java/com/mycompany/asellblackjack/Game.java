@@ -22,10 +22,10 @@ public class Game {
     Scanner scan = new Scanner(System.in); //Create the scanner object to hand input during the game.
     String playerResponse; //The variable that holds the value of the scanner when it is used.
     boolean run = false;
-    File save;
+    File save = new File("save.txt");
     
     public Game(){
-        save = new File("save.txt");
+        
     }
   
     //The main method that runs the game
@@ -89,6 +89,8 @@ public class Game {
             }
     }
     
+    
+    //The players action during the players turn
     public void playerTurn(){
         
         System.out.println("Would you like to hit(h) , stand(s) or fold(f)?");
@@ -158,7 +160,7 @@ public class Game {
                     }
                 }
             }else{
-                i = p.addCard(tempCard, 1);
+                i = p.addCard(tempCard, 2);
             }
         }else{
             p.addCard(tempCard, 1);
@@ -189,24 +191,12 @@ public class Game {
     
     //Gets a save game
     private void getGameSave(File f) throws FileNotFoundException{
-        ArrayList<Card> playerHand1 = null;
-        ArrayList<Card> playerHand2 = null;
-        ArrayList<Card> dealerHand1 = null;
-        ArrayList<Card> dealerHand2 = null;
-        ArrayList<Card> savedDeck = null;
+        Deck savedDeck = new Deck();
         Scanner input = new Scanner(save);
+       
         
-        if(playerHand2 != null){
-            player = new Player(playerHand1, playerHand2);
-        }else{
-            player = new Player(playerHand2);
-        }
-        if(dealerHand2 != null){
-            player = new Player(playerHand1, playerHand2);
-        }else{
-            player = new Player(playerHand2);
-        }
-        deck = new Deck(savedDeck);
+        player = new Player();
+        dealer = new Dealer();
         
     }
     
@@ -232,34 +222,31 @@ public class Game {
     //Prints the hand of the player that is passed to it
     private void printHand(Player p){
         System.out.println();
-        if(p.isPlayer()){
-            System.out.print("Player hand: ");
-        }else{
-            System.out.print("Dealer hand: ");
-        }
+        System.out.print(p.getName() + " hand: ");
+        
         for(int i = 0; i < p.getHand().size(); i++){
             System.out.println(p.getHand().get(i).printCard());
         }
         System.out.println("Hand Value: ");
-<<<<<<< HEAD
-        
-=======
         if(p.numAces(1) ==0){
             System.out.println(p.handValue());
         }else{
-            System.out.println(p.handValue() + " or " + p.handValue()+(10*p.numAces(1)));
+            System.out.println(p.handValue() + " or " + (p.handValue()+10*p.numAces(1)));
+            
         }
     
->>>>>>> 3df04b7627a2ebde5e797d7bf0588887fcebdaa1
         if(p.doesSplit == true){
-            if(p.isPlayer()){
-            System.out.print("Player Second hand: ");
-            }else{
-            System.out.print("Dealer Second hand: ");
-            }
+            System.out.print(p.getName() + " Second hand: ");
             for(int i = 0; i < p.getSecondHand().size(); i++){
             System.out.println(p.getSecondHand().get(i).printCard());
             }
+            System.out.println("Second Hand Value: ");
+            if(p.numAces(1) ==0){
+                System.out.println(p.secondHandValue());
+            }else{
+                System.out.println(p.secondHandValue() + " or " + p.secondHandValue()+(10*p.numAces(2)));
+        }
+    
         }
         System.out.println();
     }
@@ -269,7 +256,10 @@ public class Game {
         return s.toLowerCase().charAt(0);
     }
     
+    
+    //The dealers actions during the dealers turn
     private void dealerTurn(){
+        dealer.hand.get(1).setFaceUp();
         if(dealer.handValue() <= 16){
             System.out.println("The dealer hits this round");
             addCard(dealer);
@@ -286,6 +276,8 @@ public class Game {
            }
     }
     
+    
+    //Allows the player to play again with a reset game
     private boolean playAgain(){
         String playerResponse;
         System.out.println("Would you like to play again? y or n");
@@ -298,6 +290,8 @@ public class Game {
         }
     }
     
+    
+    //Resets the game so everything is new
     private void reset(){
          deck = new Deck();
          player = new Player();

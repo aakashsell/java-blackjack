@@ -24,20 +24,17 @@ public class Player {
     public int aces2 = 0;
     public boolean stand = false;
     public boolean stand2 = false;
+    public String name;
     
     public Player(){
         hand = new ArrayList<>();
         hand2 = new ArrayList<>();
     }
     
-    public Player(ArrayList<Card> h){
-        hand = h;
+    public Player(String n){
+        name = n;
     }
     
-    public Player(ArrayList<Card> h1, ArrayList<Card> h2){
-        hand = h1;
-        hand2 = h2;
-    }
     
     //Makes it so the player hits
     public void hit(Card c){
@@ -103,6 +100,17 @@ public class Player {
         return handValue;
     }
     
+    //Checks the value of the player's second hand
+    public int secondHandValue(){
+        
+        int handValue = 0;
+        for(int i = 0; i < hand.size();i++){
+            handValue += hand.get(i).getValue();
+        }
+        
+        return handValue;
+    }
+    
     //Returns the players hand
     public ArrayList<Card> getHand(){
         return hand;
@@ -145,6 +153,8 @@ public class Player {
         }
     }
     
+    
+    //Returns the number of aces in the deck
     public int numAces(int h){
         int x = 0;
         if(h == 1){
@@ -162,5 +172,15 @@ public class Player {
         }
         
         return x;
+    }
+    
+    
+    //Returns the name of the person playing
+    public String getName(){
+        if(name != null){
+            return name;
+        }else{
+            return "Player";
+        }
     }
 }
