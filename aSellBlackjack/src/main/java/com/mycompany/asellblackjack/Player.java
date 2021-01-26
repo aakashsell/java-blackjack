@@ -23,6 +23,7 @@ public class Player {
     public int aces = 0;
     public int aces2 = 0;
     public boolean stand = false;
+    public boolean stand2 = false;
     
     public Player(){
         hand = new ArrayList<>();
@@ -43,8 +44,13 @@ public class Player {
        
     }
     
-    public void stand(){
-        stand = true;
+    public void stand(int i){
+        switch(i){
+            case 1: stand = true;
+                    break;
+            case 2: stand2 = true;
+                    break;
+        }
     }
     
     //Jecks if the player stands.
@@ -137,5 +143,16 @@ public class Player {
         }else{
             return false;
         }
+    }
+    
+    private int numAces(){
+        int x = 0;
+        for(int i = 0; i < hand.size();i++){
+            if(hand.get(i).getValue() == 1){
+                x++;
+            }
+        }
+        
+        return x;
     }
 }

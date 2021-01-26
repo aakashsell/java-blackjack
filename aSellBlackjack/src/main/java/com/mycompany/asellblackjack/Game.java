@@ -6,6 +6,7 @@
 package com.mycompany.asellblackjack;
 
 import java.util.Scanner;
+import java.io.*;
 
 /**
  * Aakash Sell
@@ -20,8 +21,10 @@ public class Game {
     Scanner scan = new Scanner(System.in); //Create the scanner object to hand input during the game.
     String playerResponse; //The variable that holds the value of the scanner when it is used.
     boolean run = false;
+    File save;
+    
     public Game(){
-        
+        save = new File("save.txt");
     }
   
     //The main method that runs the game
@@ -97,7 +100,7 @@ public class Game {
                    break;
                case 's':
                    System.out.println("You stand!!");
-                   player.stand();
+                   player.stand(1);
                    printHand(player);
                    break;
                case 'f':
@@ -143,6 +146,7 @@ public class Game {
                 if(toChar(playerResponse) == 'y'){
                     System.out.println("Ok, splitting your hand right now.");
                     i = p.addCard(tempCard, 2);
+                    
                     if(i == 1){
                         System.out.println("This card is an ace. That means it can have a value of either 1 or 11");
                     }
@@ -168,7 +172,9 @@ public class Game {
     }
     
     //Saves the game
-    private void saveGame(){}
+    private void saveGame(){
+    
+    }
     
     
     //Gets a save game
@@ -178,7 +184,9 @@ public class Game {
     
     //Checks if there is a save game
     private boolean checkGameSave(){
-        
+        if(save.length() > 0){
+            return true;
+        }
         return false;
     }
     
@@ -204,6 +212,7 @@ public class Game {
         for(int i = 0; i < p.getHand().size(); i++){
             System.out.println(p.getHand().get(i).printCard());
         }
+        System.out.println("Hand Value: ");
         if(p.doesSplit == true){
             if(p.isPlayer()){
             System.out.print("Player Second hand: ");
@@ -230,7 +239,7 @@ public class Game {
             
         }else if(dealer.handValue() > 16){
             System.out.println("The dealer stands");
-            dealer.stand();
+            dealer.stand(1);
             printHand(dealer);
         }
         if(dealer.checkLose() == true){
@@ -272,4 +281,7 @@ public class Game {
         run = playAgain();
     }
     
+    private void gameStand(){
+        
+    }
 }

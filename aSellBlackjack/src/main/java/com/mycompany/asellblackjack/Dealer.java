@@ -35,4 +35,16 @@ public class Dealer extends Player {
         return false;
     }
     
+    
+    @Override
+    public boolean checkSplit(Card c){
+        for(int i = 0; i < hand.size() -1; i++){
+            if(hand.get(i).getValue() == c.getValue()){
+                super.split();
+                return true;
+            }
+        }
+        
+        return false;
+    }
 }

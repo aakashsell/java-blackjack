@@ -125,5 +125,9 @@ public class Card {
         }
     }
     
+    public void setAce(int i){
+        setValue(i);
+    }
+    
         
 }
