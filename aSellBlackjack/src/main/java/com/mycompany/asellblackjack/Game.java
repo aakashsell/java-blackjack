@@ -7,7 +7,10 @@ package com.mycompany.asellblackjack;
 
 import java.util.Scanner;
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Aakash Sell
@@ -29,12 +32,12 @@ public class Game {
     }
   
     //The main method that runs the game
-    public static void main(String[] args) throws FileNotFoundException{
+    public static void main(String[] args) throws FileNotFoundException, IOException{
        Game game = new Game(); //Create a new game object
        game.run();
     }
     
-    public void run() throws FileNotFoundException{
+    public void run() throws FileNotFoundException, IOException{
        run = true;
        System.out.println("Welcome to Blackjack. A game of luck and a little bit of skill. I hope you have fun!!");
        startGame();
@@ -55,12 +58,14 @@ public class Game {
             
            if(deck.getShoe().size() < 10){
                run = false;
+           }else{
+               saveGame(save);
            }
        }
     }
     
     
-    public void startGame() throws FileNotFoundException{
+    public void startGame() throws FileNotFoundException, IOException{
         if(checkGameSave() == true){
                 System.out.println("It looks like you have a saved game. Loading it up for you right now.");
                 System.out.println("Would you like to start a new(n) game or continue(c) your old game?");
@@ -179,7 +184,9 @@ public class Game {
         PrintWriter out = new PrintWriter(f);
         
         try{
-            
+            for(int i = 0; i < deck.getShoe().size(); i++){
+                out.println(deck.getShoe().get(i).saveData());
+            }
             out.close();
         }catch(Exception e){
             System.out.println("File not found");
@@ -190,10 +197,20 @@ public class Game {
     
     
     //Gets a save game
-    private void getGameSave(File f) throws FileNotFoundException{
+    private void getGameSave(File f) throws FileNotFoundException, IOException{
         Deck savedDeck = new Deck();
         Scanner input = new Scanner(save);
        
+        int [] tall = new int [100];
+        List<String> lines = Files.readAllLines(Paths.get("save.text"));
+        lines.size();
+
+        int saveData[] = new int[lines.size()];
+        int i = 0;
+        while(input.hasNextInt()){       
+            saveData[i++] = input.nextInt();
+        }
+        
         
         player = new Player();
         dealer = new Dealer();
@@ -313,7 +330,4 @@ public class Game {
         run = playAgain();
     }
     
-    private void gameStand(){
-        
-    }
 }

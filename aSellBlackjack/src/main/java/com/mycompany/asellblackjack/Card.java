@@ -30,6 +30,17 @@ public class Card {
         faceUp = f;
     }
     
+    public Card(int d){
+        processSave(d);
+    }
+    
+    public void processSave(int d){
+        String tempString = "" + d;
+        suit = Integer.parseInt(tempString.substring(1));
+        type = Integer.parseInt(tempString);
+    }
+
+    
     //Returns the value of the Card in terms of the points it represents
     public int getValue(){
         if(type >=10){
@@ -87,6 +98,8 @@ public class Card {
         
     }
     
+    
+    
     //Checks to see if the card is face up. 0 is face down, 1 is face up
     public boolean isFaceUp(){
         
@@ -108,6 +121,7 @@ public class Card {
         }
     }
     
+    //Sets the car to face up
     public void setFaceUp(){
         faceUp = 1;
     }   
@@ -117,6 +131,7 @@ public class Card {
         value = x;
     }
     
+    //Checks if the card is an ace
     public boolean isAce(){
         if(getValue() == 1){
             return true;
@@ -125,9 +140,15 @@ public class Card {
         }
     }
     
+    //Sets the value of the ace
     public void setAce(int i){
         setValue(i);
     }
     
+    //Returns a string that can be used to rebuld the deck
+    public int saveData(){
+        String i = "" + suit + type;
+        return Integer.parseInt(i);
         
+    }
 }

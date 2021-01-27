@@ -28,9 +28,7 @@ public class Deck {
         
     }
     
-    public Deck(ArrayList<Card> c){
-        shoe = c;
-    }
+    
     
     //Shuffles the deck by creating a deck by adding to the deck in a random order.
     public void shuffle(int n){
@@ -51,6 +49,10 @@ public class Deck {
     public ArrayList<Card> getShoe(){
         return shoe;
         
+    }
+    
+    public void newCard(int t, int s){
+        shoe.add(new Card(t, s, 1));
     }
     
     //creates the unshuffled deck that will be used to create the shoe
