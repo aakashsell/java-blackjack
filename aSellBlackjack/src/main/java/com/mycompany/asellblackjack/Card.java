@@ -34,6 +34,7 @@ public class Card {
         processSave(d);
     }
     
+    //Processes the save data
     public void processSave(String d){
         String tempString = d;
         type = Integer.parseInt(tempString.substring(1));

@@ -35,7 +35,7 @@ public class Dealer extends Player {
         return false;
     }
     
-    
+    //Checks if the delaer splits and automatically splits if the dealer can
     @Override
     public boolean checkSplit(Card c){
         for(int i = 0; i < hand.size() -1; i++){
@@ -48,6 +48,7 @@ public class Dealer extends Player {
         return false;
     }
     
+    //Gets the name of the dealer
     @Override
     public String getName(){
         if(name != null){

@@ -41,6 +41,7 @@ public class Player {
        
     }
     
+    //Makes it so the player stands.
     public void stand(int i){
         switch(i){
             case 1: stand = true;
@@ -145,6 +146,7 @@ public class Player {
         }
     }
     
+    //Checks to see if the player loses by going over 21 poitnts
     public boolean checkLose(){
         if(handValue()>21){
             return true;

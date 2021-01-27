@@ -37,6 +37,8 @@ public class Game {
        game.run();
     }
     
+    
+    //Runs the game from within game
     public void run() throws FileNotFoundException, IOException{
        run = true;
        System.out.println("Welcome to Blackjack. A game of luck and a little bit of skill. I hope you have fun!!");
@@ -56,15 +58,12 @@ public class Game {
                 whoWin();
             }
             
-           if(deck.getShoe().size() < 10){
-               run = false;
-           }else{
-               saveGame(saves);
-           }
+            saveGame(saves);
+           
        }
     }
     
-    
+    //Starts a game by checking if there is a save file or starting a new game if there isn't
     public void startGame() throws FileNotFoundException, IOException{
         if(checkGameSave() == true){
                 System.out.println("It looks like you have a saved game. Loading it up for you right now.");
@@ -172,6 +171,7 @@ public class Game {
         }else{
             p.addCard(tempCard, 1);
         }
+        stillRun();
         
     }
     
@@ -211,8 +211,6 @@ public class Game {
         player = new Player();
         dealer = new Dealer();
         deck = savedDeck;
-       // System.out.println(deck.getShoe().get(0).printCard());
-        //System.out.print(deck.getShoe().size());
         deal();
         
         
@@ -318,17 +316,29 @@ public class Game {
          deal();
     }
     
+    
+    //Checks to see if a player stands
     private boolean didStand(Player p){
         return p.didStand();
     }
     
+    //Checks to see who wins the game. 
     private void whoWin(){
         if(player.handValue() > dealer.handValue()){
             System.out.println("You won the game good job.");
+        }else if(player.handValue() > dealer.handValue()){
+            System.out.println("Oh no. You lost. Dealer wins.");
         }else{
-            System.out.println("Oh no. You lost.");
+            System.out.println("It a tie, dealer wins anyway.");
         }
         run = playAgain();
+    }
+    
+    //Checks if there are less then 10 cards and saves if there are more then 10 cards
+    public void stillRun(){
+        if(deck.getShoe().size() < 10){
+               run = false;
+           }
     }
     
 }
