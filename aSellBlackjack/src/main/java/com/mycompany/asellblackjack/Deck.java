@@ -25,7 +25,7 @@ public class Deck {
     Random rand = new Random();
     
     public Deck(){
-        
+        shoe = new ArrayList<>();
     }
     
     
@@ -33,8 +33,6 @@ public class Deck {
     //Shuffles the deck by creating a deck by adding to the deck in a random order.
     public void shuffle(int n){
        this.createDeck(n);
-       
-       shoe = new ArrayList<>();
        
        while(unshuffledDeck.isEmpty() != true){
        Card tempCard = unshuffledDeck.get(rand.nextInt(unshuffledDeck.size()));
@@ -53,6 +51,11 @@ public class Deck {
     
     public void newCard(int t, int s){
         shoe.add(new Card(t, s, 1));
+    }
+    
+    public void addCard(String i){
+        
+        shoe.add(new Card(i));
     }
     
     //creates the unshuffled deck that will be used to create the shoe

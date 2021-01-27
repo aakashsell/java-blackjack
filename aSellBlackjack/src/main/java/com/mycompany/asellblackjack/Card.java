@@ -30,14 +30,14 @@ public class Card {
         faceUp = f;
     }
     
-    public Card(int d){
+    public Card(String d){
         processSave(d);
     }
     
-    public void processSave(int d){
-        String tempString = "" + d;
-        suit = Integer.parseInt(tempString.substring(1));
-        type = Integer.parseInt(tempString);
+    public void processSave(String d){
+        String tempString = d;
+        type = Integer.parseInt(tempString.substring(1));
+        suit = Character.getNumericValue(tempString.charAt(0));
     }
 
     
@@ -146,9 +146,9 @@ public class Card {
     }
     
     //Returns a string that can be used to rebuld the deck
-    public int saveData(){
+    public String saveData(){
         String i = "" + suit + type;
-        return Integer.parseInt(i);
+        return i;
         
     }
 }

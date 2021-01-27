@@ -25,7 +25,7 @@ public class Game {
     Scanner scan = new Scanner(System.in); //Create the scanner object to hand input during the game.
     String playerResponse; //The variable that holds the value of the scanner when it is used.
     boolean run = false;
-    File save = new File("save.txt");
+    File saves = new File("./save.txt");
     
     public Game(){
         
@@ -59,7 +59,7 @@ public class Game {
            if(deck.getShoe().size() < 10){
                run = false;
            }else{
-               saveGame(save);
+               saveGame(saves);
            }
        }
     }
@@ -72,9 +72,11 @@ public class Game {
                 playerResponse = scan.nextLine();
                 switch (toChar(playerResponse)) {
                     case 'n':
+                        reset();
                         printRules();
                         break;
                     case 'c':
+                        getGameSave(saves);
                         System.out.println("Would you like a refresher on the rules of blackjack? y or n");
                         playerResponse = scan.nextLine();
                         if(toChar(playerResponse) == 'y'){
@@ -87,7 +89,7 @@ public class Game {
                         System.out.println("There has been an error processing your response.");
                         break;
                 }
-                getGameSave(save);
+                
             }else{
                printRules();
                reset();
@@ -131,7 +133,7 @@ public class Game {
         for(int i = 0; i < 2; i++){
          
           player.addCard(deck.getShoe().remove(0), 1);
-          dealer.addCard(deck.getShoe().remove(1), 1);
+          dealer.addCard(deck.getShoe().remove(0), 1);
           if(i != 0){
               dealer.hand.get(1).toggleFaceUp();
           }
@@ -199,27 +201,26 @@ public class Game {
     //Gets a save game
     private void getGameSave(File f) throws FileNotFoundException, IOException{
         Deck savedDeck = new Deck();
-        Scanner input = new Scanner(save);
-       
-        int [] tall = new int [100];
-        List<String> lines = Files.readAllLines(Paths.get("save.text"));
-        lines.size();
-
-        int saveData[] = new int[lines.size()];
-        int i = 0;
-        while(input.hasNextInt()){       
-            saveData[i++] = input.nextInt();
+        Scanner input = new Scanner(saves);
+        while(input.hasNext()){    
+            savedDeck.addCard(input.nextLine());
+           
         }
         
         
         player = new Player();
         dealer = new Dealer();
+        deck = savedDeck;
+       // System.out.println(deck.getShoe().get(0).printCard());
+        //System.out.print(deck.getShoe().size());
+        deal();
+        
         
     }
     
     //Checks if there is a save game
     private boolean checkGameSave(){
-        if(save.length() > 0){
+        if(saves.length() > 0){
             return true;
         }
         return false;
