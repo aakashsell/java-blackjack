@@ -154,7 +154,8 @@ public class Game {
                 playerResponse = scan.nextLine();
                 if(toChar(playerResponse) == 'y'){
                     System.out.println("Ok, splitting your hand right now.");
-                    i = p.addCard(tempCard, 2);
+                    i = p.addCard(tempCard, 1);
+                    p.split();
                     
                     if(i == 1){
                         System.out.println("This card is an ace. That means it can have a value of either 1 or 11");
@@ -166,10 +167,14 @@ public class Game {
                     }
                 }
             }else{
-                i = p.addCard(tempCard, 2);
+                i = p.addCard(tempCard, 1);
+                p.split();
             }
         }else{
             p.addCard(tempCard, 1);
+        }if(p.handValue() == 21){
+            System.out.println(p.getName() + " got blackjack!!");
+            whoWin();
         }
         stillRun();
         
@@ -251,7 +256,7 @@ public class Game {
             
         }
     
-        if(p.doesSplit == true){
+        if(p.getDoesSplit() == true){
             System.out.print(p.getName() + " Second hand: ");
             for(int i = 0; i < p.getSecondHand().size(); i++){
             System.out.println(p.getSecondHand().get(i).printCard());
@@ -260,7 +265,7 @@ public class Game {
             if(p.numAces(1) ==0){
                 System.out.println(p.secondHandValue());
             }else{
-                System.out.println(p.secondHandValue() + " or " + p.secondHandValue()+(10*p.numAces(2)));
+                System.out.println(p.secondHandValue() + " or " + (p.secondHandValue()+10*p.numAces(2)));
         }
     
         }
@@ -324,11 +329,11 @@ public class Game {
     
     //Checks to see who wins the game. 
     private void whoWin(){
-        if(player.handValue() > dealer.handValue()){
+        if(player.value() > dealer.value()){
             System.out.println("You won the game good job.");
-        }else if(player.handValue() > dealer.handValue()){
+        }else if(player.value() < dealer.value()){
             System.out.println("Oh no. You lost. Dealer wins.");
-        }else{
+        }else if(player.value() == dealer.value()){
             System.out.println("It a tie, dealer wins anyway.");
         }
         run = playAgain();

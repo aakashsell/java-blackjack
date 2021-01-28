@@ -19,7 +19,7 @@ public class Player {
     public int hands = 0; 
     public ArrayList<Card> hand;
     public ArrayList<Card> hand2;
-    public boolean doesSplit = false;
+    public boolean doesSplit;
     public int aces = 0;
     public int aces2 = 0;
     public boolean stand = false;
@@ -29,9 +29,13 @@ public class Player {
     public Player(){
         hand = new ArrayList<>();
         hand2 = new ArrayList<>();
+        doesSplit = false;
     }
     
     public Player(String n){
+        hand = new ArrayList<>();
+        hand2 = new ArrayList<>();
+        doesSplit = false;
         name = n;
     }
     
@@ -59,7 +63,7 @@ public class Player {
     //Checks to see if the player is eligible to split their hand
     public boolean checkSplit(Card c){
         for(int i = 0; i < hand.size() -1; i++){
-            if(hand.get(i).getValue() == c.getValue()){
+            if(hand.get(i).getValue() == c.getValue() || hand2.size() > 0){
                 return true;
             }
         }
@@ -105,11 +109,27 @@ public class Player {
     public int secondHandValue(){
         
         int handValue = 0;
-        for(int i = 0; i < hand.size();i++){
-            handValue += hand.get(i).getValue();
+        for(int i = 0; i < hand2.size();i++){
+            handValue += hand2.get(i).getValue();
         }
         
         return handValue;
+    }
+    
+    //Sees what values to use when the hand is split
+    public int value(){
+        if(!doesSplit){
+            return handValue();
+        }else{
+            int returnValue = 0;
+            if(secondHandValue() <= 21 && secondHandValue() >= handValue()){
+                return secondHandValue();
+            }else if(handValue() <= 21 && secondHandValue() <= handValue()){
+                return handValue();
+            }else{
+                return handValue();
+            }
+        }   
     }
     
     //Returns the players hand
@@ -184,5 +204,10 @@ public class Player {
         }else{
             return "Player";
         }
+    }
+    
+    //Gets the doesSplit variable
+    public boolean getDoesSplit(){
+        return doesSplit;
     }
 }
