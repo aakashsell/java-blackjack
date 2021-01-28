@@ -58,5 +58,16 @@ public class Dealer extends Player {
         }
     }
     
+    public void aceValue(int h){
+        int value = 0;
+        if(h == 1){
+            value = handValue();
+        }else{
+            value = secondHandValue();
+        }
+        if((value + 9) <= 21){
+            setAceToEleven();
+        }
+    }
     
 }
